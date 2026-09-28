@@ -27,6 +27,7 @@ usa = gpd.read_file("cb_2025_us_state_20m.zip")
 merged = usa.merge(state_bans, left_on='NAME', right_on='STATE_NAME', how='left')
 merged['Ban_Count'] = merged['Ban_Count'].fillna(0)
 
+#edit api 
 m = folium.Map(
     location=[37.8, -96],
     zoom_start=4,
