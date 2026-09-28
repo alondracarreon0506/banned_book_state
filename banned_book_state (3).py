@@ -27,7 +27,12 @@ usa = gpd.read_file("cb_2025_us_state_20m.zip")
 merged = usa.merge(state_bans, left_on='NAME', right_on='STATE_NAME', how='left')
 merged['Ban_Count'] = merged['Ban_Count'].fillna(0)
 
-m = folium.Map(location=[37.8, -96], zoom_start=4, tiles="cartodbpositron")
+m = folium.Map(
+    location=[37.8, -96],
+    zoom_start=4,
+    tiles="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+    attr='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+)
 
 choropleth = folium.Choropleth(
     geo_data=merged,
@@ -40,6 +45,7 @@ choropleth = folium.Choropleth(
     line_opacity=0.2,
     legend_name="Banned Books Count"
 ).add_to(m)
+
 
 for idx, row in merged.iterrows():
     if row.geometry is not None:
