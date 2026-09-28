@@ -28,12 +28,7 @@ merged = usa.merge(state_bans, left_on='NAME', right_on='STATE_NAME', how='left'
 merged['Ban_Count'] = merged['Ban_Count'].fillna(0)
 
 #edit api 
-m = folium.Map(
-    location=[37.8, -96],
-    zoom_start=4,
-    tiles="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-    attr='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-)
+m = folium.Map(location=[37.8, -96], zoom_start=4, tiles="OpenStreetMap")
 
 choropleth = folium.Choropleth(
     geo_data=merged,
